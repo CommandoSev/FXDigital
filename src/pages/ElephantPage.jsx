@@ -5,7 +5,7 @@ import axios from 'axios';
 export const ElephantPage = (props) => {
   
 const [elephants, setElephants] = useState([]);
-  const { name } = useParams();
+const { name } = useParams();
 
   const fetchData = () => {
     axios.get('https://elephant-api.herokuapp.com/elephants')
@@ -19,9 +19,8 @@ const [elephants, setElephants] = useState([]);
             "note": item.note,
           }
         })
-        const newData = data.filter(item => { return item.name == name})
+        const newData = data.filter(item => { return item.name == name });
         setElephants(newData[0]);
-        console.log(elephants);
       }).catch(err => console.log(err));
   }
 
@@ -32,11 +31,10 @@ const [elephants, setElephants] = useState([]);
 
     return (
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "15px", color: "#333", border: "solid 1px #333", borderRadius: "5px" }}>
-       <div style={{width: "90%", height: "400px", backgroundImage: `url(${elephants.image})`, backgroundSize: "cover", backgroundPosition: "center"}}></div>
-      <h1>{elephants.name}</h1>
-      <h2>{elephants.affiliation}</h2>
-      <p>{elephants.note}</p> 
-      
+          <div style={{width: "90%", height: "400px", backgroundImage: `url(${elephants.image})`, backgroundSize: "cover", backgroundPosition: "center"}}></div>
+              <h1>{elephants.name}</h1>
+              <h2>{elephants.affiliation}</h2>
+              <p>{elephants.note}</p> 
       </div>
 
     )

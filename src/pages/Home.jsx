@@ -39,9 +39,8 @@ export const Home = () => {
         {elephants.map(elephant => (
           <Link to={`/elephant/${elephant.name}`} >
             <Card key={elephant._id} image={elephant.image} name={elephant.name} affiliation={elephant.affiliation} />
-            </Link>
-        ))}
-        
+          </Link>
+        ))}       
       </div>
     </>
   );
