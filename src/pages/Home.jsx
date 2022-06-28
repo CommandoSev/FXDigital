@@ -1,0 +1,53 @@
+import React, { useState, useEffect} from 'react';
+import Card from '../components/Card';
+import axios from 'axios';
+
+
+export const Home = () => {
+
+  const [elephants, setElephants] = useState([]);
+
+  const fetchData = () => {
+    axios.get('https://elephant-api.herokuapp.com/elephants')
+      .then(res => {
+        const data = res.data.map((item) => {
+          return {
+            "_id": item._id,
+            "affiliation": item.affiliation,
+            "name": item.name,
+            "image": item.image,
+            "note": item.note,
+          }
+        })
+        const size = 10;
+        const newData = data.slice(0, size);
+        setElephants(newData);
+        console.log(elephants)
+      }).catch(err => console.log(err));
+  }
+
+  useEffect(() => {
+    fetchData()
+  })
+  
+  
+  // axios.get('https://elephant-api.herokuapp.com/elephants')
+  //   .then(res => console.log(res.data));
+  
+    
+    
+
+  return (
+    <>
+      <h1>Elephants</h1>
+      <div className="App" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", rowGap: "10px", columnGap: "20px" }}>
+        {elephants.map(elephant => (
+          <Card key={elephant._id} image={elephant.image} name={elephant.name} affiliation={elephant.affiliation} />
+        ))}
+        
+      </div>
+    </>
+  );
+};
+
+export default Home;
